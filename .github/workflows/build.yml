@@ -42,5 +42,5 @@ jobs:
         if: success()
         with:
           name: MoeTruyen-Mihon-Extension-APK
-          path: app/build/outputs/apk/debug/*.apk
+          path: build/outputs/apk/debug/*.apk
           if-no-files-found: warn
