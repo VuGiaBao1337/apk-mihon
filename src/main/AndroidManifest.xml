@@ -1,5 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
-<manifest xmlns:android="http://schemas.android.com/apk/res/android">
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    package="eu.kanade.tachiyomi.extension.vi.moetruyen">
+
+    <uses-feature android:name="tachiyomi.extension" android:required="true" />
 
     <application
         android:label="MoeTruyen Mihon Extension"
@@ -7,15 +10,11 @@
         android:icon="@android:drawable/sym_def_app_icon">
         
         <meta-data
-            android:name="x-tachiyomi-extension-class"
-            android:value="eu.kanade.tachiyomi.extension.vi.moetruyen.MoeTruyen" />
+            android:name="tachiyomi.extension.class"
+            android:value=".MoeTruyen" />
             
         <meta-data
-            android:name="x-tachiyomi-extension-version"
-            android:value="1" />
-            
-        <meta-data
-            android:name="x-tachiyomi-extension-nsfw"
+            android:name="tachiyomi.extension.nsfw"
             android:value="0" />
 
     </application>
