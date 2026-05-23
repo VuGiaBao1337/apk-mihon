@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <application
+        android:label="MoeTruyen Mihon Extension"
+        android:hasCode="true"
+        android:icon="@android:drawable/sym_def_app_icon">
+        
+        <meta-data
+            android:name="x-tachiyomi-extension-class"
+            android:value="eu.kanade.tachiyomi.extension.vi.moetruyen.MoeTruyen" />
+            
+        <meta-data
+            android:name="x-tachiyomi-extension-version"
+            android:value="1" />
+            
+        <meta-data
+            android:name="x-tachiyomi-extension-nsfw"
+            android:value="0" />
+
+    </application>
+
+</manifest>
