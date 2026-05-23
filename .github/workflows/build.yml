@@ -1,19 +1,17 @@
-name: Build Standalone Extension APK
+name: Build MoeTruyen Extension APK
 
 on:
   push:
-    branches: [ main, master ]
-  pull_request:
     branches: [ main, master ]
   workflow_dispatch:
 
 jobs:
   build:
-    name: Build Extension APK
+    name: Build APK
     runs-on: ubuntu-latest
 
     steps:
-      - name: Checkout Repository
+      - name: Checkout
         uses: actions/checkout@v4
 
       - name: Set up JDK 17
@@ -23,24 +21,15 @@ jobs:
           distribution: 'temurin'
           cache: 'gradle'
 
-      - name: Build tachiyomix dependency from source
-        run: |
-          git clone https://github.com/VuGiaBao1337/moetruyen-mihon.git ../tachiyomix
-          cd ../tachiyomix
-          chmod +x gradlew
-          ./gradlew publishToMavenLocal --no-daemon
-          cd "$GITHUB_WORKSPACE"
-
-      - name: Make Gradle Wrapper Executable
+      - name: Grant execute permission for gradlew
         run: chmod +x gradlew
 
-      - name: Build APK with Gradle
+      - name: Build Debug APK
         run: ./gradlew assembleDebug --no-daemon
 
-      - name: Archive Extension APK Artifact
+      - name: Upload APK
         uses: actions/upload-artifact@v4
-        if: success()
         with:
-          name: MoeTruyen-Mihon-Extension-APK
+          name: MoeTruyen-Extension
           path: build/outputs/apk/debug/*.apk
-          if-no-files-found: warn
+          if-no-files-found: error

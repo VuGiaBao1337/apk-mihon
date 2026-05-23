@@ -1,5 +1,6 @@
 plugins {
-    id("com.android.application") version "9.2.0"
+    id("com.android.application") version "8.2.2"
+    id("org.jetbrains.kotlin.android") version "1.9.22"
 }
 
 android {
@@ -17,7 +18,9 @@ android {
     buildTypes {
         release {
             isMinifyEnabled = false
-            proguardFiles(getDefaultProguardFile("proguard-android-optimize.txt"), "proguard-rules.pro")
+        }
+        debug {
+            isMinifyEnabled = false
         }
     }
 
@@ -25,18 +28,19 @@ android {
         sourceCompatibility = JavaVersion.VERSION_17
         targetCompatibility = JavaVersion.VERSION_17
     }
+
+    kotlinOptions {
+        jvmTarget = "17"
+    }
 }
 
 dependencies {
-    // We can use compileOnly because these are stubs provided by Mihon app at runtime.
-    // Try to resolve from local maven first (published from tachiyomix-main), or fallback to JitPack.
-    compileOnly("com.github.mihonapp:tachiyomix:1.6.0-SNAPSHOT") {
-        isTransitive = false
-    }
+    // Official Mihon extension stub library — provides all base classes for compilation.
+    // At runtime, Mihon itself provides these; we only need them to compile.
+    compileOnly("com.github.mihonapp:extensions-lib:1.5")
 
-    // Dependencies needed for scraping (compileOnly to prevent duplicate class conflicts at runtime)
-    compileOnly("org.jsoup:jsoup:1.15.4")
-    compileOnly("com.squareup.okhttp3:okhttp:4.10.0")
-    compileOnly("io.reactivex:rxandroid:1.2.1")
+    // Provided by Mihon at runtime; needed at compile-time only
+    compileOnly("org.jsoup:jsoup:1.17.2")
+    compileOnly("com.squareup.okhttp3:okhttp:4.12.0")
     compileOnly("io.reactivex:rxjava:1.3.8")
 }

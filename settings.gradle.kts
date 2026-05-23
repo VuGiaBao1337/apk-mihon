@@ -3,18 +3,18 @@ pluginManagement {
         google()
         mavenCentral()
         gradlePluginPortal()
-        maven(url = "https://www.jitpack.io")
     }
 }
 
 dependencyResolutionManagement {
+    @Suppress("UnstableApiUsage")
     repositoriesMode.set(RepositoriesMode.FAIL_ON_PROJECT_REPOS)
+    @Suppress("UnstableApiUsage")
     repositories {
         google()
         mavenCentral()
-        mavenLocal() // For resolving local tachiyomix builds
-        maven(url = "https://www.jitpack.io")
+        maven(url = "https://jitpack.io")
     }
 }
 
-rootProject.name = "moetruyen-mihon-apk"
+rootProject.name = "MoeTruyenExtension"
