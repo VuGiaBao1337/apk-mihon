@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="eu.kanade.tachiyomi.extension.vi.moetruyen">
+<manifest xmlns:android="http://schemas.android.com/apk/res/android">
 
     <uses-feature android:name="tachiyomi.extension" android:required="true" />
 
@@ -8,11 +7,11 @@
         android:label="Tachiyomi: Mòe Truyện"
         android:hasCode="true"
         android:icon="@android:drawable/sym_def_app_icon">
-        
+
         <meta-data
             android:name="tachiyomi.extension.class"
             android:value=".MoeTruyen" />
-            
+
         <meta-data
             android:name="tachiyomi.extension.nsfw"
             android:value="0" />
