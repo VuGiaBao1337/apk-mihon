@@ -34,9 +34,9 @@ dependencies {
         isTransitive = false
     }
 
-    // Dependencies needed for scraping
-    implementation("org.jsoup:jsoup:1.15.4")
-    implementation("com.squareup.okhttp3:okhttp:4.10.0")
-    implementation("io.reactivex:rxandroid:1.2.1")
-    implementation("io.reactivex:rxjava:1.3.8")
+    // Dependencies needed for scraping (compileOnly to prevent duplicate class conflicts at runtime)
+    compileOnly("org.jsoup:jsoup:1.15.4")
+    compileOnly("com.squareup.okhttp3:okhttp:4.10.0")
+    compileOnly("io.reactivex:rxandroid:1.2.1")
+    compileOnly("io.reactivex:rxjava:1.3.8")
 }
