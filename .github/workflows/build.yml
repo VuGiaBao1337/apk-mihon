@@ -29,7 +29,7 @@ jobs:
           cd ../tachiyomix
           chmod +x gradlew
           ./gradlew publishToMavenLocal --no-daemon
-          cd ../moetruyen-mihon-apk
+          cd "$GITHUB_WORKSPACE"
 
       - name: Make Gradle Wrapper Executable
         run: chmod +x gradlew
