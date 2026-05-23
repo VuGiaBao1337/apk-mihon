@@ -420,5 +420,9 @@ class MoeTruyen : HttpSource() {
             android.util.Base64.URL_SAFE or android.util.Base64.NO_PADDING or android.util.Base64.NO_WRAP,
         )
 
+    override fun chapterPageParse(response: Response): SChapter =
+        throw UnsupportedOperationException()
+
     override fun getFilterList() = FilterList()
 }
+
