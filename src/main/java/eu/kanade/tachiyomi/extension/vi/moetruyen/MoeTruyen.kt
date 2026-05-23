@@ -7,11 +7,11 @@ import eu.kanade.tachiyomi.source.model.SChapter
 import eu.kanade.tachiyomi.source.model.SManga
 import eu.kanade.tachiyomi.source.online.ParsedHttpSource
 import okhttp3.Headers
-import okhttp3.MediaType
+import okhttp3.MediaType.Companion.toMediaTypeOrNull
 import okhttp3.OkHttpClient
 import okhttp3.Request
-import okhttp3.RequestBody
-import okhttp3.ResponseBody
+import okhttp3.RequestBody.Companion.toRequestBody
+import okhttp3.ResponseBody.Companion.toResponseBody
 import org.jsoup.nodes.Document
 import org.jsoup.nodes.Element
 import java.util.Calendar
@@ -56,17 +56,17 @@ class MoeTruyen : ParsedHttpSource() {
         .addInterceptor { chain ->
             val request = chain.request()
             val response = chain.proceed(request)
-            val urlString = request.url().toString()
+            val urlString = request.url.toString()
 
             val entry = imgxGrants[urlString]
             if (entry != null) {
-                val scrambledBytes = response.body()?.bytes() ?: throw Exception("IMGX: Tải ảnh thất bại")
+                val scrambledBytes = response.body?.bytes() ?: throw Exception("IMGX: Tải ảnh thất bại")
                 try {
                     val decodeKey = unwrapDecodeKeyFromGrant(entry.grant, entry.storageKey)
                     val decryptedBytes = decodeImgxWithKey(scrambledBytes, decodeKey)
 
-                    val mediaType = MediaType.parse("image/webp")
-                    val body = ResponseBody.create(mediaType, decryptedBytes)
+                    val mediaType = "image/webp".toMediaTypeOrNull()
+                    val body = decryptedBytes.toResponseBody(mediaType)
                     response.newBuilder().body(body).build()
                 } catch (e: Exception) {
                     e.printStackTrace()
@@ -256,8 +256,8 @@ class MoeTruyen : ParsedHttpSource() {
                         chunk.forEach { array.put(it) }
                         jsonBody.put("pageIndexes", array)
 
-                        val mediaType = MediaType.parse("application/json; charset=utf-8")
-                        val requestBody = RequestBody.create(mediaType, jsonBody.toString())
+                        val mediaType = "application/json; charset=utf-8".toMediaTypeOrNull()
+                        val requestBody = jsonBody.toString().toRequestBody(mediaType)
 
                         val request = Request.Builder()
                             .url(pageAccessUrl)
@@ -267,7 +267,7 @@ class MoeTruyen : ParsedHttpSource() {
 
                         client.newCall(request).execute().use { response ->
                             if (response.isSuccessful) {
-                                val respStr = response.body()?.string() ?: ""
+                                val respStr = response.body?.string() ?: ""
                                 val respObj = org.json.JSONObject(respStr)
                                 val pagesArray = respObj.getJSONArray("pages")
                                 for (i in 0 until pagesArray.length()) {
