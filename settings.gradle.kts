@@ -1,18 +1,10 @@
 pluginManagement {
-    resolutionStrategy {
-        eachPlugin {
-            if (requested.id.id == "org.jetbrains.kotlin.android") {
-                useVersion("1.9.22")
-            }
-        }
-    }
     repositories {
         google()
         mavenCentral()
         gradlePluginPortal()
     }
 }
-
 
 dependencyResolutionManagement {
     @Suppress("UnstableApiUsage")
